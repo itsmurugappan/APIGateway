@@ -1,3 +1,6 @@
+### Kong API Gateway
+
+This repo has some of my poc's on Kong on how to set it up and how to use plugins.
 
 ### Install Cassandra
 
