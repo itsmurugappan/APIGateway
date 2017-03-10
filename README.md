@@ -30,7 +30,7 @@ $ docker run -d --name kong \
 download the .pkg from https://getkong.org/install/osx/
 
 # before starting open the config at /etc/kong/kong.conf and check the datastore config
-# if file not present make a copy of default file and rename to kon.conf
+# if file not present make a copy of default file and rename to kong.conf
 
 # start kong
 $ kong start -c /etc/kong/kong.conf --vv
@@ -87,6 +87,19 @@ $ curl -X POST http://localhost:8003/consumers/restuser1/key-auth -d ''
 $ http get http://localhost:8002/counter apikey:xxxx
 ```
 
+### ACL
+
+```
+# Restrict user access based on groups
+
+$ http POST http://localhost:8003/apis/soaptest1/plugins name=acl config.whitelist=soapgroup
+$ http POST http://localhost:8003/consumers/soapuser1/acls  group=soapgroup
+
+$ http POST http://localhost:8003/apis/resttest2/plugins name=acl config.whitelist=restgroup
+$ http POST http://localhost:8003/consumers/restuser1/acls  group=restgroup
+
+# through soapuser1 key u cannot access the rest service
+```
 
 ### Dashboard
 
